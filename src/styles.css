@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+table tbody tr td {
+    font-size: 14px;
+}

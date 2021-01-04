@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CreateProductComponent } from './create-product/create-product.component';
 
 @NgModule({
     imports:        [ 
-        BrowserModule 
+        BrowserModule,
+        ReactiveFormsModule
     ],
     providers:      [],
     declarations:   [ 
