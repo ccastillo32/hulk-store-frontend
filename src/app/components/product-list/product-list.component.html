@@ -33,7 +33,11 @@
                 </div>
             </div>
 
-            <table class="table table-sm table-bordered">
+            <div *ngIf="loading" class="clearfix">
+                Cargando ...
+            </div>
+
+            <table class="table table-sm table-bordered" *ngIf="!loading">
 
                 <thead class="thead-dark">
                     <tr class="text-center">

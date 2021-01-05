@@ -13,6 +13,8 @@ export class ProductListComponent implements OnInit {
 
     inventoryItems: InventoryItem[] = [];
 
+    loading: boolean = false;
+
     constructor(
         private routingService: RoutingService,
         private inventoryService: InventoryService
@@ -28,12 +30,14 @@ export class ProductListComponent implements OnInit {
 
     private findAllInventoryItems(): void {
 
+        this.loading = true;
+
         this.inventoryService.findAllInventoryItems().subscribe(
             (response: InventoryItem[]) => {
                 console.log( response );
                 this.inventoryItems = response;
             }
-        );
+        ).add( () => this.loading = false );
 
     }
 
