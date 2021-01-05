@@ -28,6 +28,8 @@ export class HttpService {
 
     handleError( error ): Observable<any> {
 
+        console.error( error );
+
         let statusCode: number = error.status;
 
         if(statusCode === 409) {
@@ -38,9 +40,5 @@ export class HttpService {
 
         return of();
     } 
-
-    private showAlertInfo(message: string) {
-        alert(message);
-    }
 
 }
