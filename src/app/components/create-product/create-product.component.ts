@@ -66,9 +66,7 @@ export class CreateProductComponent implements OnInit {
                 (response: CreateProductResponse) => {
 
                     this.goToProductList();
-
-                    this.showAlertInfo('Producto creado exitosamente.');
-
+                    
                 }
             ).add( () => this.loading = false )
         }

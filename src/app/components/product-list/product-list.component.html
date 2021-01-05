@@ -59,10 +59,13 @@
                         <td>{{ item.product?.name }}</td>
                         <td>{{ item.product?.franchise?.name }}</td>
                         <td>{{ item.product?.category?.name }}</td>
-                        <td>{{ item.incomings }}</td>
-                        <td>{{ item.outgoings }}</td>
-                        <td>{{ item.inStock() }}</td>
-                        <td></td>
+                        <td class="text-right">{{ item.incomings }}</td>
+                        <td class="text-right">{{ item.outgoings }}</td>
+                        <td class="text-right">{{ item.inStock() }}</td>
+                        <td class="text-center">
+                            <em class="fas fa-info-circle"></em>
+                            <em class="fas fa-people-carry ml-3"></em>
+                        </td>
                     </tr>
 
                 </tbody>
