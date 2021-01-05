@@ -64,7 +64,8 @@ export class CreateProductComponent implements OnInit {
             const request: CreateProductRequest = this.convertFormDataToRequest();
             this.productService.saveProduct(request).subscribe(
                 (response: CreateProductResponse) => {
-                    console.log( response.id );
+
+                    this.goToProductList();
 
                     this.showAlertInfo('Producto creado exitosamente.');
 

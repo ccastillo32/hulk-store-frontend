@@ -50,6 +50,17 @@
 
                 <tbody>
 
+                    <tr *ngFor="let item of inventoryItems">
+                        <td>{{ item.product?.code }}</td>
+                        <td>{{ item.product?.name }}</td>
+                        <td>{{ item.product?.franchise?.name }}</td>
+                        <td>{{ item.product?.category?.name }}</td>
+                        <td>{{ item.incomings }}</td>
+                        <td>{{ item.outgoings }}</td>
+                        <td>{{ item.inStock() }}</td>
+                        <td></td>
+                    </tr>
+
                 </tbody>
 
             </table>
