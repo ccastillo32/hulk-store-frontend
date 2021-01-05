@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RoutingService } from 'src/app/routing/routing.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -34,7 +35,8 @@ export class CreateProductComponent implements OnInit {
     constructor(
         private categoryService: CategoryService,
         private franchiseService: FranchiseService,
-        private productService: ProductService
+        private productService: ProductService,
+        private routingService: RoutingService
     ) {
     }
 
@@ -70,6 +72,10 @@ export class CreateProductComponent implements OnInit {
             ).add( () => this.loading = false )
         }
 
+    }
+
+    goToProductList(): void {
+        this.routingService.goToProductList()
     }
 
     private generateRandomCode(): string {

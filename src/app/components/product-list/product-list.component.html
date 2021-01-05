@@ -1,0 +1,61 @@
+<div class="container-fluid">
+
+    <div class="row mb-2 mt-2 text-center">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <h5>Gesti&oacute;n de Inventario</h5>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+
+    <!-- Page title -->
+
+    <nav class="navbar navbar-expand-md breadcrumb">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="nav nav-pills">
+                <strong>Inventario actual</strong>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+
+    <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane fade show active" id="products">
+
+            <div class="mb-3 float-left">
+                <div class="btn-group mr-2">
+                    <button type="button" (click)="goToCreateProduct()" class="btn btn-secondary">+ Crear producto</button>
+                    <button type="button" class="btn btn-secondary ml-2">Ver todos los movimientos</button>
+                </div>
+            </div>
+
+            <table class="table table-sm table-bordered">
+
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th scope="column">C&oacute;digo</th>
+                        <th scope="column">Nombre</th>
+                        <th scope="column">Franquicia</th>
+                        <th scope="column">Categor&iacute;a</th>
+                        <th scope="column">Entradas</th>
+                        <th scope="column">Salidas</th>
+                        <th scope="column">En stock</th>
+                        <th scope="column">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

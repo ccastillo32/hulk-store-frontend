@@ -2,16 +2,20 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { RoutingService } from './routing.service';
+
 import { CreateProductComponent } from '../components/create-product/create-product.component';
+import { ProductListComponent } from '../components/product-list/product-list.component';
 
 const routes: Routes = [
     {path: 'create-product', component: CreateProductComponent},
-    {path: '**', redirectTo: '/create-product', pathMatch: 'full'}
+    {path: 'products', component: ProductListComponent},
+    {path: '**', redirectTo: '/products', pathMatch: 'full'}
 ];
 
 @NgModule({
     imports:        [ CommonModule, RouterModule.forRoot(routes) ],
-    providers:      [],
+    providers:      [ RoutingService ],
     declarations:   [],
     exports:        [],
     bootstrap:      []

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CreateProductComponent } from './create-product/create-product.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @NgModule({
     imports:        [ 
@@ -11,10 +12,12 @@ import { CreateProductComponent } from './create-product/create-product.componen
     ],
     providers:      [],
     declarations:   [ 
-        CreateProductComponent 
+        CreateProductComponent,
+        ProductListComponent
     ],
     exports:        [ 
-        CreateProductComponent 
+        CreateProductComponent,
+        ProductListComponent
     ],
     bootstrap:      []
 })
