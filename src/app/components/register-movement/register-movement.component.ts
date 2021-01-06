@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { InventoryItem } from 'src/app/model/inventory-item.model';
 import { Product } from 'src/app/model/product.model';
 import { RoutingService } from 'src/app/routing/routing.service';
+import { MovementService } from 'src/app/services/movement.service';
+import { RegisterMovementRequest } from 'src/app/services/request/register-movement.request';
+import { RegisterMovementResponse } from 'src/app/services/response/register-movement.response';
 
 @Component({
     selector: 'register-movement',
@@ -21,14 +25,15 @@ export class RegisterMovementComponent implements OnInit {
         movementType: new FormControl('INCOMINGS', [Validators.required]),
         code: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
-        quantity: new FormControl(0, [Validators.required, Validators.min(0)]),
+        quantity: new FormControl(0, [Validators.required, Validators.min(1)]),
         unitPrice: new FormControl(0, [Validators.required, Validators.min(0)]),
         subTotal: new FormControl(0, [Validators.required, Validators.min(0)]), 
         observation: new FormControl('', []),
     });
 
     constructor(
-        private routingService: RoutingService
+        private routingService: RoutingService,
+        private movementService: MovementService
     ) {
         this.itemSelected = this.routingService.getNavigationData();
     }
@@ -49,23 +54,44 @@ export class RegisterMovementComponent implements OnInit {
         }
     }
 
+    save(): void {
+
+        this.formSubmitted = true;
+
+        if( this.registerMovementForm.valid ) {
+
+            if( this.quantityIsValid() ) {
+                this.registerMovement();
+            } else {
+                const currentStock: number = this.itemSelected.inStock();
+
+                if(currentStock === 0) {
+                    alert('No se pueden hacer movimientos de salida, ya que el producto no tiene unidades disponibles en stock');
+                } else {
+                    alert(`Este producto solamente tiene disponibles ${currentStock} ${ currentStock > 1 ? 'unidades' : 'unidad'} en stock`);
+                }
+            }
+
+        }
+
+    }
+
     onchangeMovementType(): void {
-        const type = this.registerMovementForm.get('movementType').value;
-        if('INCOMINGS' === type) {
+
+        if( this.isIncomingMovement() ) {
             this.registerMovementForm.controls.unitPrice.setValue( this.itemSelected?.product.purchasePrice );
         }
-        if('OUTGOINGS' === type) {
+
+        if( this.isOutgoingMovement() ) {
             this.registerMovementForm.controls.unitPrice.setValue( this.itemSelected?.product.sellingPrice );
         }
+
     }
 
     onChangeQuantityOrUnitPrice(): void {
 
         const unitPrice: number = this.registerMovementForm.get('unitPrice').value;
         const quantity: number = this.registerMovementForm.get('quantity').value;
-
-        console.log('Price: ' + unitPrice);
-        console.log('Quantity: ' + quantity);
 
         if(unitPrice && quantity) {
 
@@ -91,6 +117,55 @@ export class RegisterMovementComponent implements OnInit {
     isNegative(fieldName: string): boolean {
         return this.registerMovementForm.get(fieldName).hasError('min') 
                 && (this.registerMovementForm.get(fieldName).touched || this.formSubmitted)
+    }
+
+    private quantityIsValid(): boolean {
+        let isValid: boolean = true;
+        if( this.isOutgoingMovement() ) {
+            const currentStock: number = this.itemSelected.inStock();
+            const quantity: number = this.registerMovementForm.get('quantity').value;
+            isValid = ( quantity <= currentStock );
+        }
+        return isValid;
+    }
+
+    private isIncomingMovement(): boolean {
+        const type = this.registerMovementForm.get('movementType').value;
+        return type === 'INCOMINGS';
+    }
+
+    private isOutgoingMovement(): boolean {
+        const type = this.registerMovementForm.get('movementType').value;
+        return type === 'OUTGOINGS';
+    }
+
+    private registerMovement(): void {
+        const request: RegisterMovementRequest = this.getRequest();
+        const productId = this.itemSelected.product.id;
+
+        let registerMovement$: Observable<RegisterMovementResponse> = null;
+
+        if( this.isIncomingMovement() ) {
+            registerMovement$ = this.movementService.registerIncomingMovement( productId, request );
+        } else if( this.isOutgoingMovement() ) {
+            registerMovement$ = this.movementService.registerOutgoingMovement( productId, request );
+        }
+
+        this.loading = true;
+
+        registerMovement$.subscribe(
+            (response: RegisterMovementResponse) => {
+                this.routingService.goToProductList();
+            }
+        ).add( () => this.loading = false );
+    }
+
+    private getRequest(): RegisterMovementRequest {
+        let request: RegisterMovementRequest = new RegisterMovementRequest();
+        request.quantity = this.registerMovementForm.get('quantity').value;
+        request.unitPrice = this.registerMovementForm.get('unitPrice').value;
+        request.observation = this.registerMovementForm.get('observation').value;
+        return request;
     }
 
 }

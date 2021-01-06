@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RoutingService } from 'src/app/routing/routing.service';
@@ -69,6 +70,8 @@ export class CreateProductComponent implements OnInit {
                     
                 }
             ).add( () => this.loading = false )
+        } else {
+            this.loading = false;
         }
 
     }

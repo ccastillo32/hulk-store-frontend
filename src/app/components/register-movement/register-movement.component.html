@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-sm-4">
                         <span *ngIf="isEmpty('quantity')" class="error">Campo es obligatorio</span>
-                        <span *ngIf="isNegative('quantity')" class="error">Campo no puede ser negativo</span>
+                        <span *ngIf="isNegative('quantity')" class="error">La cantidad no puede ser cero o negativa</span>
                     </div>
                 </div>
 
@@ -133,7 +133,7 @@
 
                 <div class="form-group row">
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-dark">Guardar</button>
+                        <button type="button" (click)="save()" class="btn btn-dark">Guardar</button>
                         <button type="button" (click)="cancel()" class="btn btn-secondary ml-3">Cancelar</button>
                     </div>
                 </div>

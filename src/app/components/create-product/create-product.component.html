@@ -70,7 +70,7 @@
                         <label for="code">C&oacute;digo:</label>
                     </div>
                     <div class="col-sm-4">
-                        <input formControlName="code" class="form-control" id="code">
+                        <input formControlName="code" class="form-control" id="code" autocomplete="off">
                     </div>
                     <div class="col-sm-4">
                         <span *ngIf="isEmpty('code')" class="error">Campo es obligatorio</span>
@@ -83,7 +83,7 @@
                         <label for="name">Nombre:</label>
                     </div>
                     <div class="col-sm-4">
-                        <input formControlName="name" class="form-control" id="name">
+                        <input formControlName="name" class="form-control" id="name" autocomplete="off">
                     </div>
                     <div class="col-sm-4">
                         <span *ngIf="isEmpty('name')" class="error">Campo es obligatorio</span>
@@ -96,7 +96,7 @@
                         <label for="purchasePrice">Precio de compra:</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="number" formControlName="purchasePrice" class="form-control" id="purchasePrice">
+                        <input type="number" formControlName="purchasePrice" class="form-control" id="purchasePrice" autocomplete="off">
                     </div>
                     <div class="col-sm-4">
                         <span *ngIf="isEmpty('purchasePrice')" class="error">Campo es obligatorio</span>
@@ -110,7 +110,7 @@
                         <label for="sellingPrice">Precio de venta:</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="number" formControlName="sellingPrice"  class="form-control" id="sellingPrice">
+                        <input type="number" formControlName="sellingPrice"  class="form-control" id="sellingPrice" autocomplete="off">
                     </div>
                     <div class="col-sm-4">
                         <span *ngIf="isEmpty('sellingPrice')" class="error">Campo es obligatorio</span>
