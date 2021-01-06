@@ -20,7 +20,8 @@ export class MovementListComponent implements OnInit {
 
     constructor(
         private movementServive: MovementService,
-        private productService: ProductService
+        private productService: ProductService,
+        private routingService: RoutingService
     ) {}
 
     ngOnInit() {
@@ -36,6 +37,10 @@ export class MovementListComponent implements OnInit {
             this.findAllMovements();
         }
 
+    }
+
+    goToHomePage(): void {
+        this.routingService.goToProductList();
     }
 
     private findAllMovements(): void {
