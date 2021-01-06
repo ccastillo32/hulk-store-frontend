@@ -28,8 +28,8 @@ export class ProductListComponent implements OnInit {
         this.routingService.goToCreateProduct();
     }
 
-    goToRegisterMovement(): void {
-        this.routingService.goToRegisterMovement();
+    goToRegisterMovement(itemSelected: InventoryItem): void {
+        this.routingService.goToRegisterMovement(itemSelected);
     }
 
     private findAllInventoryItems(): void {

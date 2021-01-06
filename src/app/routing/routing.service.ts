@@ -19,12 +19,16 @@ export class RoutingService {
     this.navigateByURL('/products')
   }
 
-  goToRegisterMovement(): void {
-    this.navigateByURL('/register-movement');
+  goToRegisterMovement(productInfo?: any): void {
+    this.navigateByURL('/register-movement', productInfo);
   }
 
-  navigateByURL(url: string) {
-    this.router.navigateByUrl(url);
+  navigateByURL(url: string, data? : any) {
+    this.router.navigateByUrl(url, { state: data });
+  }
+
+  getNavigationData(): any {
+    return this.router.getCurrentNavigation().extras.state;
   }
 
 }
