@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { RegisterMovementComponent } from './register-movement/register-movement.component';
+import { MovementListComponent } from './movement-list/movement-list.component';
 
 @NgModule({
     imports:        [ 
@@ -15,12 +16,14 @@ import { RegisterMovementComponent } from './register-movement/register-movement
     declarations:   [ 
         CreateProductComponent,
         ProductListComponent,
-        RegisterMovementComponent
+        RegisterMovementComponent,
+        MovementListComponent
     ],
     exports:        [ 
         CreateProductComponent,
         ProductListComponent,
-        RegisterMovementComponent
+        RegisterMovementComponent,
+        MovementListComponent
     ],
     bootstrap:      []
 })

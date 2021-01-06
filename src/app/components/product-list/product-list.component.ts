@@ -32,6 +32,10 @@ export class ProductListComponent implements OnInit {
         this.routingService.goToRegisterMovement(itemSelected);
     }
 
+    goToMovementList(): void {
+        this.routingService.goToMovementList();
+    }
+
     private findAllInventoryItems(): void {
 
         this.loading = true;
