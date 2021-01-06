@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { RegisterMovementComponent } from './register-movement/register-movement.component';
 
 @NgModule({
     imports:        [ 
@@ -13,11 +14,13 @@ import { ProductListComponent } from './product-list/product-list.component';
     providers:      [],
     declarations:   [ 
         CreateProductComponent,
-        ProductListComponent
+        ProductListComponent,
+        RegisterMovementComponent
     ],
     exports:        [ 
         CreateProductComponent,
-        ProductListComponent
+        ProductListComponent,
+        RegisterMovementComponent
     ],
     bootstrap:      []
 })
