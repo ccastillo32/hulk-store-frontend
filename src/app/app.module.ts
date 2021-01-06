@@ -7,6 +7,7 @@ import { ComponentsModule } from './components/components.module';
 import { RouterModule } from '@angular/router';
 import { RoutingModule } from './routing/routing.module';
 import { ServicesModule } from './services/services.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ServicesModule } from './services/services.module';
   imports: [
     BrowserModule,
     ComponentsModule,
+    FormsModule,
     RouterModule,
     RoutingModule,
     ServicesModule

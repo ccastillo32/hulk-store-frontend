@@ -38,4 +38,12 @@ export class ProductRestApiService extends ProductService {
 
     }
 
+    findById(productId: string): Observable<Product> {
+
+        const url: string = `http://localhost:9099/api/products/${productId}`;
+
+        return this.httpService.get(url);
+
+    }
+
 }

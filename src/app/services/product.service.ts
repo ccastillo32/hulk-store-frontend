@@ -10,4 +10,6 @@ export abstract class ProductService {
 
     abstract findAllProducts(): Observable<Product[]>;
 
+    abstract findById(productId: string): Observable<Product>
+
 }

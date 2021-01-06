@@ -36,7 +36,7 @@ export class MovementRestApiService extends MovementService {
 
     }
 
-    getAllProductMovements(): Observable<MovementListItem[]> {
+    getAllMovements(): Observable<MovementListItem[]> {
 
         const url: string = 'http://localhost:9099/api/movements';
 
@@ -52,6 +52,33 @@ export class MovementRestApiService extends MovementService {
                 return allMovements.map( (movement: Movement) => {
 
                     const product: Product = allProducts.find(p => p.id === movement.productId);
+
+                    let item: MovementListItem  = new MovementListItem();
+                    item.movement = movement;
+                    item.product = product;
+                    return item;
+
+                })
+
+            })
+        );
+
+    }
+
+    getAllMovementsByProduct(productId: string): Observable<MovementListItem[]> {
+
+        const url: string = `http://localhost:9099/api/movements?productId=${productId}`;
+
+        const allMovementsByProduct$: Observable<Movement[]> = this.httpService.get(url).pipe(
+            map( response => response.movements as Movement[] )
+        );
+
+        const product$: Observable<Product> = this.productService.findById(productId);
+
+        return forkJoin([ allMovementsByProduct$, product$ ]).pipe(
+            map(([ allMovementsByProduct, product ]) => {
+
+                return allMovementsByProduct.map( (movement: Movement) => {
 
                     let item: MovementListItem  = new MovementListItem();
                     item.movement = movement;

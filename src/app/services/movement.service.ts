@@ -10,6 +10,8 @@ export abstract class MovementService {
 
     public abstract registerOutgoingMovement(productId: string, request: RegisterMovementRequest): Observable<RegisterMovementResponse> 
 
-    public abstract getAllProductMovements(): Observable<MovementListItem[]>;
+    public abstract getAllMovements(): Observable<MovementListItem[]>;
+
+    public abstract getAllMovementsByProduct(productId: string): Observable<MovementListItem[]>;
 
 }

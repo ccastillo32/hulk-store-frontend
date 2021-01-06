@@ -36,8 +36,17 @@
                 Cargando ...
             </div>
 
-            <div class="w-100">
-                aas
+            <div>
+                <div>
+                    Filtros:
+                </div>
+                <div>
+                    Por producto: 
+                    <select [(ngModel)]="selectedProductId" (change)="onChangeProduct()">
+                        <option></option>
+                        <option *ngFor="let product of allProducts" [value]="product.id">{{ product.code }}</option>
+                    </select>
+                </div>
             </div>
 
             <table class="table table-sm table-bordered" *ngIf="!loading">
@@ -73,7 +82,7 @@
                         <td>{{ item.movement.observation }}</td>
                     </tr>
 
-                    <tr *ngIf="inventoryItems?.length === 0">
+                    <tr *ngIf="movementListItems?.length === 0">
                         <td colspan="10">No hay movimientos registrados</td>
                     </tr>
 
