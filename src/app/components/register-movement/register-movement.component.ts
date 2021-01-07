@@ -155,7 +155,7 @@ export class RegisterMovementComponent implements OnInit {
 
         registerMovement$.subscribe(
             (response: RegisterMovementResponse) => {
-                this.routingService.goToProductList();
+                this.routingService.goToMovementList();
             }
         ).add( () => this.loading = false );
     }
