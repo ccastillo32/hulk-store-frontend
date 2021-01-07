@@ -20,7 +20,7 @@ export class CategoryRestApiService extends CategoryService {
 
         const url = 'http://localhost:9099/api/categories';
 
-        return this.httpService.get(url).pipe(
+        return this.httpService.get(url, true).pipe(
             map( (response: any) => response.categories as Category[] )
         )
 

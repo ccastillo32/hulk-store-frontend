@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError } from 'rxjs/operators';
@@ -14,20 +14,25 @@ export class HttpService {
     ) {
     }
 
-    get(url: string): Observable<any> {
-        return this.http.get(url).pipe(
+    get(url: string, needsAuthorization?: boolean): Observable<any> {
+        
+        const headers: any = this.getHeaders(needsAuthorization); 
+
+        return this.http.get( url , headers).pipe(
             catchError( this.handleError )
         );
     }
 
-    post(url: string, requestBody: any): Observable<any> {
-        return this.http.post(url, requestBody).pipe(
+    post(url: string, requestBody: any, needsAuthorization?: boolean): Observable<any> {
+        const headers: any = this.getHeaders(needsAuthorization);
+        return this.http.post(url, requestBody, headers).pipe(
             catchError( this.handleError )
         );
     }
 
-    put(url: string, requestBody: any): Observable<any> {
-        return this.http.put(url, requestBody).pipe(
+    put(url: string, requestBody: any, needsAuthorization?: boolean): Observable<any> {
+        const headers: any = this.getHeaders(needsAuthorization);
+        return this.http.put(url, requestBody, headers).pipe(
             catchError( this.handleError )
         );
     }
@@ -46,5 +51,20 @@ export class HttpService {
 
         return of();
     } 
+
+    getHeaders(needsAuthorization: boolean): any {
+
+        let header = null;
+
+        if(needsAuthorization) {
+            const token = sessionStorage.getItem('token');
+            header = new HttpHeaders({ "Authorization": token});
+        } else {
+            header = new HttpHeaders({});
+        }
+
+        return {  headers: header }
+
+    }
 
 }

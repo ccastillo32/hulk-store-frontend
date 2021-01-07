@@ -20,7 +20,7 @@ export class FranchiseRestApiService extends FranchiseService {
 
         const url = 'http://localhost:9099/api/franchises';
 
-        return this.httpService.get(url).pipe(
+        return this.httpService.get(url, true).pipe(
             map( (response: any) => response.franchises as Franchise[] )
         )
 

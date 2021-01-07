@@ -24,7 +24,7 @@ export class ProductRestApiService extends ProductService {
 
         const url: string = 'http://localhost:9099/api/products';
 
-        return this.httpService.post(url, request).pipe(
+        return this.httpService.post(url, request, true).pipe(
             map((response: any) => response as CreateProductResponse)
         )
 
@@ -34,7 +34,7 @@ export class ProductRestApiService extends ProductService {
 
         const url: string = 'http://localhost:9099/api/products';
 
-        return this.httpService.get(url).pipe(
+        return this.httpService.get(url, true).pipe(
             map((response: any) => response.products as Product[])
         );
 
@@ -44,7 +44,7 @@ export class ProductRestApiService extends ProductService {
 
         const url: string = `http://localhost:9099/api/products/${productId}`;
 
-        return this.httpService.get(url);
+        return this.httpService.get(url, true);
 
     }
 
@@ -52,7 +52,7 @@ export class ProductRestApiService extends ProductService {
 
         const url: string = `http://localhost:9099/api/products/${productId}`;
 
-        return this.httpService.put(url, request).pipe(
+        return this.httpService.put(url, request, true).pipe(
             map( (response: any) => of(new UpdateProductResponse()) )
         );
 

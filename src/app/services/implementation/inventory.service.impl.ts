@@ -27,7 +27,7 @@ export class InventoryRestApiService extends InventoryService {
         const allProducts$: Observable<Product[]> = this.productService.findAllProducts();
 
         const url: string = 'http://localhost:9099/api/inventory-info';
-        const allInventoryInfo$: Observable<InventoryInfo[]> = this.httpService.get(url).pipe(
+        const allInventoryInfo$: Observable<InventoryInfo[]> = this.httpService.get(url, true).pipe(
             map( (response: any) => {
                 return response.items as InventoryInfo[]
             })

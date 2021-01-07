@@ -40,7 +40,7 @@ export class MovementRestApiService extends MovementService {
 
         const url: string = 'http://localhost:9099/api/movements';
 
-        const allMovements$: Observable<Movement[]> = this.httpService.get(url).pipe(
+        const allMovements$: Observable<Movement[]> = this.httpService.get(url, true).pipe(
             map( response => response.movements as Movement[] )
         );
 
@@ -69,7 +69,7 @@ export class MovementRestApiService extends MovementService {
 
         const url: string = `http://localhost:9099/api/movements?productId=${productId}`;
 
-        const allMovementsByProduct$: Observable<Movement[]> = this.httpService.get(url).pipe(
+        const allMovementsByProduct$: Observable<Movement[]> = this.httpService.get(url, true).pipe(
             map( response => response.movements as Movement[] )
         );
 
@@ -96,7 +96,7 @@ export class MovementRestApiService extends MovementService {
 
         const url: string = `http://localhost:9099/api/movements/${productId}/${movementType}`;
 
-        return this.httpService.post(url, request).pipe(
+        return this.httpService.post(url, request, true).pipe(
             map( response => response as RegisterMovementResponse )
         );
 
