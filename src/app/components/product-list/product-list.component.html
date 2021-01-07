@@ -63,6 +63,7 @@
                         <td class="text-right">{{ item.outgoings }}</td>
                         <td class="text-right">{{ item.inStock() }}</td>
                         <td class="text-center">
+                            <em (click)="goToEditProduct( item.product )" class="fa fa-2x fa-pencil-alt mr-3" title="Ver detalle del producto"></em>
                             <em (click)="goToRegisterMovement( item )" class="fa fa-2x fa-comments-dollar" title="Registrar movimiento de entrada/salida"></em>
                         </td>
                     </tr>

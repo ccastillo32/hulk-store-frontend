@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Product } from 'src/app/model/product.model';
 import { RoutingService } from 'src/app/routing/routing.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { ProductService } from 'src/app/services/product.service';
 import { CreateProductRequest } from 'src/app/services/request/create-product.request';
+import { UpdateProductRequest } from 'src/app/services/request/update-product.request';
 import { CreateProductResponse } from 'src/app/services/response/create-product.response';
+import { UpdateProductResponse } from 'src/app/services/response/update-product.response';
 
 import { Category } from '../../model/category.model';
 import { Franchise } from '../../model/franchise.model';
@@ -22,6 +25,7 @@ export class CreateProductComponent implements OnInit {
 
     categories: Category[] = [];
     franchises: Franchise[] = [];
+    selectedProduct: Product;
 
     createProductForm = new FormGroup({
         code: new FormControl(this.generateRandomCode(), [Validators.required]),
@@ -38,11 +42,16 @@ export class CreateProductComponent implements OnInit {
         private productService: ProductService,
         private routingService: RoutingService
     ) {
+        const data: any = this.routingService.getNavigationData();
+        if(data) {
+            this.selectedProduct = (data as Product);
+        }
     }
 
     ngOnInit(): void {
         this.findAllCategories();
         this.findAllFranchises();
+        this.initFormDataIfProductIsSelected();
     }
 
     isEmpty(fieldName: string): boolean {
@@ -73,6 +82,31 @@ export class CreateProductComponent implements OnInit {
             this.loading = false;
         }
 
+    }
+
+    updateProduct(): void {
+        
+        this.formSubmitted = true;
+        this.loading = true;
+
+        if(this.createProductForm.valid) {
+            const request: UpdateProductRequest = this.convertFormDataToRequest();
+            const productId: string = this.selectedProduct.id;
+            this.productService.updateProduct(productId, request).subscribe(
+                (response: UpdateProductResponse) => {
+
+                    this.goToProductList();
+
+                }
+            ).add( () => this.loading = false)
+        } else {
+            this.loading = false;
+        }
+
+    }
+
+    isEditingAnExistingProduct(): boolean {
+        return ( this.selectedProduct !== null && this.selectedProduct !== undefined );
     }
 
     goToProductList(): void {
@@ -113,6 +147,19 @@ export class CreateProductComponent implements OnInit {
 
     private showAlertInfo(message: string): void {
         alert(message);
+    }
+
+    private initFormDataIfProductIsSelected(): void {
+
+        if(this.selectedProduct) {
+            this.createProductForm.controls.category.setValue( this.selectedProduct.category.id );
+            this.createProductForm.controls.franchise.setValue( this.selectedProduct.franchise.id );
+            this.createProductForm.controls.code.setValue( this.selectedProduct.code );
+            this.createProductForm.controls.name.setValue( this.selectedProduct.name );
+            this.createProductForm.controls.purchasePrice.setValue( this.selectedProduct.purchasePrice );
+            this.createProductForm.controls.sellingPrice.setValue( this.selectedProduct.sellingPrice );
+        }
+
     }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/model/product.model';
 
 import { RoutingService } from 'src/app/routing/routing.service';
 import { InventoryItem } from '../../model/inventory-item.model';
@@ -36,13 +37,16 @@ export class ProductListComponent implements OnInit {
         this.routingService.goToMovementList();
     }
 
+    goToEditProduct(product: Product): void {
+        this.routingService.goToEditProduct(product);
+    }
+
     private findAllInventoryItems(): void {
 
         this.loading = true;
 
         this.inventoryService.findAllInventoryItems().subscribe(
             (response: InventoryItem[]) => {
-                console.log( response );
                 this.inventoryItems = response;
             }
         ).add( () => this.loading = false );

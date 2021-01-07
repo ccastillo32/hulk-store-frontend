@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Product } from '../model/product.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +27,10 @@ export class RoutingService {
 
   goToMovementList(): void {
     this.navigateByURL('/movement-list')
+  }
+
+  goToEditProduct(product: Product) {
+    this.navigateByURL('/create-product', product);
   }
 
   navigateByURL(url: string, data? : any) {

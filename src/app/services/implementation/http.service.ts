@@ -26,6 +26,12 @@ export class HttpService {
         );
     }
 
+    put(url: string, requestBody: any): Observable<any> {
+        return this.http.put(url, requestBody).pipe(
+            catchError( this.handleError )
+        );
+    }
+
     handleError( error ): Observable<any> {
 
         console.error( error );

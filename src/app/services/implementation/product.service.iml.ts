@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { empty, Observable, of } from "rxjs";
 import { map } from 'rxjs/operators';
 
 import { HttpService } from './http.service';
@@ -7,6 +7,8 @@ import { ProductService } from "../product.service";
 import { CreateProductRequest } from '../request/create-product.request';
 import { CreateProductResponse } from '../response/create-product.response';
 import { Product } from 'src/app/model/product.model';
+import { UpdateProductRequest } from '../request/update-product.request';
+import { UpdateProductResponse } from '../response/update-product.response';
 
 @Injectable({
     providedIn: 'root'
@@ -43,6 +45,16 @@ export class ProductRestApiService extends ProductService {
         const url: string = `http://localhost:9099/api/products/${productId}`;
 
         return this.httpService.get(url);
+
+    }
+
+    updateProduct(productId: string, request: UpdateProductRequest): Observable<UpdateProductResponse> {
+
+        const url: string = `http://localhost:9099/api/products/${productId}`;
+
+        return this.httpService.put(url, request).pipe(
+            map( (response: any) => of(new UpdateProductResponse()) )
+        );
 
     }
 
