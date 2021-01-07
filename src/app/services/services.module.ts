@@ -7,6 +7,7 @@ import { FranchiseService } from './franchise.service';
 import { ProductService } from './product.service';
 import { InventoryService } from './inventory.service';
 import { MovementService } from './movement.service';
+import { LoginService } from './login.service';
 
 import { HttpService } from './implementation/http.service';
 import { CategoryRestApiService } from './implementation/category.service.impl';
@@ -14,6 +15,7 @@ import { FranchiseRestApiService } from './implementation/franchise.service.impl
 import { ProductRestApiService } from './implementation/product.service.iml';
 import { InventoryRestApiService } from './implementation/inventory.service.impl';
 import { MovementRestApiService } from './implementation/movement.service.impl';
+import { LoginRestApiService } from './implementation/login.service.impl';
 
 @NgModule({
     imports:        [ 
@@ -26,7 +28,8 @@ import { MovementRestApiService } from './implementation/movement.service.impl';
         {provide: FranchiseService, useClass: FranchiseRestApiService},
         {provide: ProductService, useClass: ProductRestApiService},
         {provide: InventoryService, useClass: InventoryRestApiService},
-        {provide: MovementService, useClass: MovementRestApiService}
+        {provide: MovementService, useClass: MovementRestApiService},
+        {provide: LoginService, useClass: LoginRestApiService}
     ],
     declarations:   [],
     exports:        [],
