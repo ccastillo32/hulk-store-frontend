@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { RoutingService } from 'src/app/routing/routing.service';
 
 @Component({
     selector: 'app-header',
@@ -10,12 +11,19 @@ export class HeaderComponent implements OnInit {
     pageTitle: string = 'Gestión de inventario';
     @Input() subtitle;
 
-    constructor() {
+    constructor(
+        private routingService: RoutingService
+    ) {
 
     }
 
     ngOnInit() {
 
+    }
+
+    logout(): void {
+        sessionStorage.removeItem('token');
+        this.routingService.goToLogin();
     }
 
 }
