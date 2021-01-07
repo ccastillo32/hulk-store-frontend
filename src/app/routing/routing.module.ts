@@ -16,7 +16,7 @@ const routes: Routes = [
     {path: 'register-movement', component: RegisterMovementComponent},
     {path: 'movement-list', component: MovementListComponent},
     {path: 'login', component: LoginComponent},
-    {path: '**', redirectTo: '/products', pathMatch: 'full'}
+    {path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({

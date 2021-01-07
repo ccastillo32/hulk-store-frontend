@@ -6,6 +6,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { ProductListComponent } from './product-list/product-list.component';
 import { RegisterMovementComponent } from './register-movement/register-movement.component';
 import { MovementListComponent } from './movement-list/movement-list.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     imports:        [ 
@@ -18,13 +19,15 @@ import { MovementListComponent } from './movement-list/movement-list.component';
         CreateProductComponent,
         ProductListComponent,
         RegisterMovementComponent,
-        MovementListComponent
+        MovementListComponent,
+        LoginComponent
     ],
     exports:        [ 
         CreateProductComponent,
         ProductListComponent,
         RegisterMovementComponent,
-        MovementListComponent
+        MovementListComponent,
+        LoginComponent
     ],
     bootstrap:      []
 })
