@@ -37,6 +37,10 @@ export class RoutingService {
     this.navigateByURL('/login');
   }
 
+  goToCreateUser(): void {
+    this.navigateByURL('/sign-up');
+  }
+
   navigateByURL(url: string, data? : any) {
     this.router.navigateByUrl(url, { state: data });
   }

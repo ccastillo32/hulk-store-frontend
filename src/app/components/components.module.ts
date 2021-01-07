@@ -8,12 +8,15 @@ import { RegisterMovementComponent } from './register-movement/register-movement
 import { MovementListComponent } from './movement-list/movement-list.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports:        [ 
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterModule
     ],
     providers:      [],
     declarations:   [ 
@@ -22,7 +25,8 @@ import { HeaderComponent } from './header/header.component';
         RegisterMovementComponent,
         MovementListComponent,
         LoginComponent,
-        HeaderComponent
+        HeaderComponent,
+        CreateUserComponent
     ],
     exports:        [ 
         CreateProductComponent,
@@ -30,7 +34,8 @@ import { HeaderComponent } from './header/header.component';
         RegisterMovementComponent,
         MovementListComponent,
         LoginComponent,
-        HeaderComponent
+        HeaderComponent,
+        CreateUserComponent
     ],
     bootstrap:      []
 })

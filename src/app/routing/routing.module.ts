@@ -11,6 +11,7 @@ import { ProductListComponent } from '../components/product-list/product-list.co
 import { RegisterMovementComponent } from '../components/register-movement/register-movement.component';
 import { MovementListComponent } from '../components/movement-list/movement-list.component';
 import { LoginComponent } from '../components/login/login.component';
+import { CreateUserComponent } from '../components/create-user/create-user.component';
 
 const routes: Routes = [
     {path: 'create-product', component: CreateProductComponent, canActivate: [AuthenticationGuard]},
@@ -18,6 +19,7 @@ const routes: Routes = [
     {path: 'register-movement', component: RegisterMovementComponent, canActivate: [AuthenticationGuard]},
     {path: 'movement-list', component: MovementListComponent, canActivate: [AuthenticationGuard]},
     {path: 'login', component: LoginComponent},
+    {path: 'sign-up', component: CreateUserComponent},
     {path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
 

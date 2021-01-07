@@ -56,6 +56,10 @@ export class LoginComponent implements OnInit {
 
     }
 
+    goToSignUp(): void {
+        this.routingService.goToCreateUser();
+    }
+
     isEmpty(fieldName: string): boolean {
         return this.loginForm.get(fieldName).hasError('required') 
                 && (this.loginForm.get(fieldName).touched || this.formSubmitted)
