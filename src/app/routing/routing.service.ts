@@ -29,8 +29,12 @@ export class RoutingService {
     this.navigateByURL('/movement-list')
   }
 
-  goToEditProduct(product: Product) {
+  goToEditProduct(product: Product) : void {
     this.navigateByURL('/create-product', product);
+  }
+
+  goToLogin(): void {
+    this.navigateByURL('/login');
   }
 
   navigateByURL(url: string, data? : any) {
