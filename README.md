@@ -1,27 +1,33 @@
-# HulkStoreFrontend
+#### Hulk-store - Front-end
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
+Aplicación acerca de gestión de inventarios.
 
-## Development server
+El proyecto fue generado en Angular v10.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+El back-end correspondiente se encuentra en el siguiente repositorio:
+[hulk-store-api](https://github.com/ccastillo32/hulk-store-api)
 
-## Code scaffolding
+#### Software requerido:
+- Node (npm)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Pasos para ejecutar aplicación:
 
-## Build
+Acceder a la consola de comandos, y desde la carpeta raiz del proyecto, ejecutar los siguientes comandos:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+npm install
+ng serve -o
+```
 
-## Running unit tests
+La aplicación debería estar disponible en el puerto 4200.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+http://localhost:4200
+```
 
-## Running end-to-end tests
+Hay un usuario configurado por defecto (se puede crear uno desde la aplicación):
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+usuario: demo
+password: demo1234
+```
