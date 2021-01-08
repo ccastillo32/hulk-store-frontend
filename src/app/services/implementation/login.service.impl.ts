@@ -1,11 +1,13 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 import { LoginRequest } from '../request/login.request';
 import { LoginResponse } from '../response/login.response';
 import { LoginService } from "../login.service";
 import { HttpService } from './http.service';
-import { map } from 'rxjs/operators';
+import { CreateUserRequest } from '../request/create-user.request';
+import { CreateUserResponse } from '../response/create-user.response';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +28,16 @@ export class LoginRestApiService extends LoginService {
         return this.httpService.post(url, request).pipe(
             map((response: any) => response as LoginResponse)
         )
+
+    }
+
+    signUp(request: CreateUserRequest): Observable<CreateUserResponse> {
+
+        const url: string = 'http://localhost:9099/api/auth/sign-up';
+
+        return this.httpService.post(url, request).pipe(
+            map((response: any) => response as CreateUserResponse)
+        );
 
     }
 
