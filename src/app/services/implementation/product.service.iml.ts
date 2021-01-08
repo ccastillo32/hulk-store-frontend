@@ -35,9 +35,23 @@ export class ProductRestApiService extends ProductService {
 
         let url: string = 'http://localhost:9099/api/products';
 
-        if(filter && filter.franchiseId) {
-            url = url + `?franchiseId=${ filter.franchiseId }`;
+        if(filter) {
+            url += '?';
+            let previousFilter: boolean = false;
+
+            if(filter.franchiseId) {
+                url += `franchiseId=${filter.franchiseId}`;
+                previousFilter = true;
+            }
+
+            if(filter.categoryId) {
+                url += `${ previousFilter ? '&': ''}categoryId=${filter.categoryId}`;
+                previousFilter = true;
+            }
+
         }
+
+        console.log('Products:' + url);
 
         return this.httpService.get(url, true).pipe(
             map((response: any) => response.products as Product[])

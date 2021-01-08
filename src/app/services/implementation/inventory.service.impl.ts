@@ -29,9 +29,23 @@ export class InventoryRestApiService extends InventoryService {
 
         let url: string = 'http://localhost:9099/api/inventory-info';
 
-        if(filter && filter.franchiseId) {
-            url = url + `?franchiseId=${filter.franchiseId}`;
+        if(filter) {
+            url += '?';
+            let previousFilter: boolean = false;
+
+            if(filter.franchiseId) {
+                url += `franchiseId=${filter.franchiseId}`;
+                previousFilter = true;
+            }
+
+            if(filter.categoryId) {
+                url += `${ previousFilter ? '&': ''}categoryId=${filter.categoryId}`;
+                previousFilter = true;
+            }
+
         }
+
+        console.log('Inventory:' + url);
 
         const allInventoryInfo$: Observable<InventoryInfo[]> = this.httpService.get(url, true).pipe(
             map( (response: any) => {

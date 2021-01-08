@@ -36,6 +36,11 @@
                         <option></option>
                         <option *ngFor="let franchise of franchises" [value]="franchise.id">{{ franchise.name }}</option> 
                     </select>
+                    <label class="ml-3">Filtar por categoria: </label>
+                    <select [(ngModel)]="selectedCategoryId" (change)="onChangeSelectecCategory()">
+                        <option></option>
+                        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option> 
+                    </select>
                 </div>
             </div>
 
