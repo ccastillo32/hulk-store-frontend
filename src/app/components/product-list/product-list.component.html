@@ -29,6 +29,16 @@
                 Cargando ...
             </div>
 
+            <div class="mb-3">
+                <div class="text-right">
+                    Filtar por franquicia: 
+                    <select [(ngModel)]="selectedFranchiseId" (change)="onChangeSelectedFranchise()">
+                        <option></option>
+                        <option *ngFor="let franchise of franchises" [value]="franchise.id">{{ franchise.name }}</option> 
+                    </select>
+                </div>
+            </div>
+
             <table class="table table-bordered" *ngIf="!loading">
 
                 <thead class="thead-dark">

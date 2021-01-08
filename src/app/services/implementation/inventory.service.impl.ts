@@ -8,6 +8,7 @@ import { InventoryService } from "../inventory.service";
 import { ProductService } from '../product.service';
 import { HttpService } from './http.service';
 import { InventoryInfo } from '../../model/inventory-info.model';
+import { FilterOptions } from '../request/filter-options.request';
 
 @Injectable({
     providedIn: 'root'
@@ -22,11 +23,16 @@ export class InventoryRestApiService extends InventoryService {
         super();
     }
 
-    public findAllInventoryItems(): Observable<InventoryItem[]> {
+    public findAllInventoryItems(filter?: FilterOptions): Observable<InventoryItem[]> {
 
-        const allProducts$: Observable<Product[]> = this.productService.findAllProducts();
+        const allProducts$: Observable<Product[]> = this.productService.findAllProducts(filter);
 
-        const url: string = 'http://localhost:9099/api/inventory-info';
+        let url: string = 'http://localhost:9099/api/inventory-info';
+
+        if(filter && filter.franchiseId) {
+            url = url + `?franchiseId=${filter.franchiseId}`;
+        }
+
         const allInventoryInfo$: Observable<InventoryInfo[]> = this.httpService.get(url, true).pipe(
             map( (response: any) => {
                 return response.items as InventoryInfo[]

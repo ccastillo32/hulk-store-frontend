@@ -9,6 +9,7 @@ import { CreateProductResponse } from '../response/create-product.response';
 import { Product } from 'src/app/model/product.model';
 import { UpdateProductRequest } from '../request/update-product.request';
 import { UpdateProductResponse } from '../response/update-product.response';
+import { FilterOptions } from '../request/filter-options.request';
 
 @Injectable({
     providedIn: 'root'
@@ -30,9 +31,13 @@ export class ProductRestApiService extends ProductService {
 
     }
 
-    findAllProducts(): Observable<Product[]> {
+    findAllProducts( filter?: FilterOptions ): Observable<Product[]> {
 
-        const url: string = 'http://localhost:9099/api/products';
+        let url: string = 'http://localhost:9099/api/products';
+
+        if(filter && filter.franchiseId) {
+            url = url + `?franchiseId=${ filter.franchiseId }`;
+        }
 
         return this.httpService.get(url, true).pipe(
             map((response: any) => response.products as Product[])
