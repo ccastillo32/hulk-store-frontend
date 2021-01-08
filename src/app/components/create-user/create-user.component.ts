@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2'
+
 import { RoutingService } from 'src/app/routing/routing.service';
 import { LoginService } from 'src/app/services/login.service';
 import { CreateUserRequest } from 'src/app/services/request/create-user.request';
@@ -49,7 +51,11 @@ export class CreateUserComponent implements OnInit {
                 this.loginService.signUp(request).subscribe(
                     (response: CreateUserResponse) => {
 
-                        alert('Usuario creado exitosamente');
+                        Swal.fire(
+                            'Usuario creado',
+                            'Usuario creado exitosamente',
+                            'success'
+                        )
 
                         this.routingService.goToLogin();
 
@@ -58,7 +64,11 @@ export class CreateUserComponent implements OnInit {
 
             } else {
 
-                alert('Las contraseñas ingresadas no son iguales');
+                Swal.fire(
+                    'Error',
+                    'Las contraseñas ingresadas son son iguales',
+                    'error'
+                )
 
             }
 

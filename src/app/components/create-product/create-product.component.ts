@@ -145,10 +145,6 @@ export class CreateProductComponent implements OnInit {
         return request;
     }
 
-    private showAlertInfo(message: string): void {
-        alert(message);
-    }
-
     private initFormDataIfProductIsSelected(): void {
 
         if(this.selectedProduct) {

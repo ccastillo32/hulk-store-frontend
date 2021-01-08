@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import Swal from 'sweetalert2'
 import { Observable, of } from "rxjs";
 import { catchError } from 'rxjs/operators';
 
@@ -58,9 +59,18 @@ export class HttpService {
                 message = 'El código del producto ya se encuentra registrado. Por favor ingrese uno diferente';
             }
 
-            alert( message );
+            Swal.fire(
+                'Error',
+                message,
+                'error'
+            )
+
         } else {
-            alert('Something went wrong!');
+            Swal.fire(
+                'Error',
+                'Algo salió mal. Tal vez el backend no está iniciado.',
+                'error'
+            )
         }
 
         return of();

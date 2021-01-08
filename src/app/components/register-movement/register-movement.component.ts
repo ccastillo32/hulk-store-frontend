@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 import { Observable } from 'rxjs';
+
 import { InventoryItem } from 'src/app/model/inventory-item.model';
 import { Product } from 'src/app/model/product.model';
 import { RoutingService } from 'src/app/routing/routing.service';
@@ -66,9 +67,21 @@ export class RegisterMovementComponent implements OnInit {
                 const currentStock: number = this.itemSelected.inStock();
 
                 if(currentStock === 0) {
-                    alert('No se pueden hacer movimientos de salida, ya que el producto no tiene unidades disponibles en stock');
+
+                    Swal.fire(
+                        'Error',
+                        'No se pueden hacer movimientos de salida, ya que el producto no tiene unidades disponibles en stock',
+                        'error'
+                    );
+
                 } else {
-                    alert(`Este producto solamente tiene disponibles ${currentStock} ${ currentStock > 1 ? 'unidades' : 'unidad'} en stock`);
+
+                    Swal.fire(
+                        'Error',
+                        `Este producto solamente tiene disponibles ${currentStock} ${ currentStock > 1 ? 'unidades' : 'unidad'} en stock`,
+                        'error'
+                    );
+
                 }
             }
 
