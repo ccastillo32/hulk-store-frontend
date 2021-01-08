@@ -2,6 +2,7 @@ import { forkJoin, Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
+import { environment } from '../../../environments/environment';
 import { MovementService } from "../movement.service";
 import { RegisterMovementRequest } from "../request/register-movement.request";
 import { RegisterMovementResponse } from "../response/register-movement.response";
@@ -38,7 +39,7 @@ export class MovementRestApiService extends MovementService {
 
     getAllMovements(): Observable<MovementListItem[]> {
 
-        const url: string = 'http://localhost:9099/api/movements';
+        const url: string = `${environment.api.host}/api/movements`;
 
         const allMovements$: Observable<Movement[]> = this.httpService.get(url, true).pipe(
             map( response => response.movements as Movement[] )
@@ -67,7 +68,7 @@ export class MovementRestApiService extends MovementService {
 
     getAllMovementsByProduct(productId: string): Observable<MovementListItem[]> {
 
-        const url: string = `http://localhost:9099/api/movements?productId=${productId}`;
+        const url: string = `${environment.api.host}/api/movements?productId=${productId}`;
 
         const allMovementsByProduct$: Observable<Movement[]> = this.httpService.get(url, true).pipe(
             map( response => response.movements as Movement[] )
@@ -94,7 +95,7 @@ export class MovementRestApiService extends MovementService {
 
     private registerMovement(productId: string, request: RegisterMovementRequest, movementType: string): Observable<RegisterMovementResponse> {
 
-        const url: string = `http://localhost:9099/api/movements/${productId}/${movementType}`;
+        const url: string = `${environment.api.host}/api/movements/${productId}/${movementType}`;
 
         return this.httpService.post(url, request, true).pipe(
             map( response => response as RegisterMovementResponse )

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { empty, Observable, of } from "rxjs";
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 import { HttpService } from './http.service';
 import { ProductService } from "../product.service";
 import { CreateProductRequest } from '../request/create-product.request';
@@ -16,14 +17,14 @@ import { FilterOptions } from '../request/filter-options.request';
 })
 
 export class ProductRestApiService extends ProductService {
-    
+
     constructor(private httpService: HttpService) {
         super();
     }
 
     saveProduct(request: CreateProductRequest): Observable<CreateProductResponse> {
 
-        const url: string = 'http://localhost:9099/api/products';
+        const url: string = `${environment.api.host}/api/products`;
 
         return this.httpService.post(url, request, true).pipe(
             map((response: any) => response as CreateProductResponse)
@@ -33,7 +34,7 @@ export class ProductRestApiService extends ProductService {
 
     findAllProducts( filter?: FilterOptions ): Observable<Product[]> {
 
-        let url: string = 'http://localhost:9099/api/products';
+        let url: string = `${environment.api.host}/api/products`;
 
         if(filter) {
             url += '?';
@@ -61,7 +62,7 @@ export class ProductRestApiService extends ProductService {
 
     findById(productId: string): Observable<Product> {
 
-        const url: string = `http://localhost:9099/api/products/${productId}`;
+        const url: string = `${environment.api.host}/api/products/${productId}`;
 
         return this.httpService.get(url, true);
 
@@ -69,7 +70,7 @@ export class ProductRestApiService extends ProductService {
 
     updateProduct(productId: string, request: UpdateProductRequest): Observable<UpdateProductResponse> {
 
-        const url: string = `http://localhost:9099/api/products/${productId}`;
+        const url: string = `${environment.api.host}/api/products/${productId}`;
 
         return this.httpService.put(url, request, true).pipe(
             map( (response: any) => of(new UpdateProductResponse()) )

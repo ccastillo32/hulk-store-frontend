@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 import { LoginRequest } from '../request/login.request';
 import { LoginResponse } from '../response/login.response';
 import { LoginService } from "../login.service";
@@ -23,7 +24,7 @@ export class LoginRestApiService extends LoginService {
 
     public login(request: LoginRequest): Observable<LoginResponse> {
 
-        const url: string = 'http://localhost:9099/api/auth/login';
+        const url: string = `${environment.api.host}/api/auth/login`;
 
         return this.httpService.post(url, request).pipe(
             map((response: any) => response as LoginResponse)
@@ -33,7 +34,7 @@ export class LoginRestApiService extends LoginService {
 
     signUp(request: CreateUserRequest): Observable<CreateUserResponse> {
 
-        const url: string = 'http://localhost:9099/api/auth/sign-up';
+        const url: string = `${environment.api.host}/api/auth/sign-up`;
 
         return this.httpService.post(url, request).pipe(
             map((response: any) => response as CreateUserResponse)

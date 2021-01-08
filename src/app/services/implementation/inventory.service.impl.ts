@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
+import { environment } from '../../../environments/environment';
 import { InventoryItem } from "../../model/inventory-item.model";
 import { Product } from "../../model/product.model";
 import { InventoryService } from "../inventory.service";
@@ -27,7 +28,7 @@ export class InventoryRestApiService extends InventoryService {
 
         const allProducts$: Observable<Product[]> = this.productService.findAllProducts(filter);
 
-        let url: string = 'http://localhost:9099/api/inventory-info';
+        let url: string = `${environment.api.host}/api/inventory-info`;
 
         if(filter) {
             url += '?';
@@ -44,8 +45,6 @@ export class InventoryRestApiService extends InventoryService {
             }
 
         }
-
-        console.log('Inventory:' + url);
 
         const allInventoryInfo$: Observable<InventoryInfo[]> = this.httpService.get(url, true).pipe(
             map( (response: any) => {
