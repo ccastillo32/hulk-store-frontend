@@ -44,7 +44,21 @@ export class HttpService {
         let statusCode: number = error.status;
 
         if(statusCode === 409) {
-            alert( error.error.message);
+
+            const code: string = error.error.code;
+            let message: string = error.error.message;
+
+            if('BAD_CREDENTIALS' === code) {
+                message = 'El usuario o la contraseña son incorrectos';
+            } else if('USERNAME_ALREADY_EXISTS' === code) {
+                message = 'El username ya se encuentra registrado. Por favor ingrese uno diferente';
+            } else if('PRODUCT_WITHOUT_STOCK' === code) {
+                message = 'El producto no cuenta con suficiente stock para poder realizar este movimiento';
+            } else if('PRODUCT_CODE_ALREADY_EXISTS' === code) {
+                message = 'El código del producto ya se encuentra registrado. Por favor ingrese uno diferente';
+            }
+
+            alert( message );
         } else {
             alert('Something went wrong!');
         }

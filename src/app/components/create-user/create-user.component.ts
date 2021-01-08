@@ -68,6 +68,10 @@ export class CreateUserComponent implements OnInit {
 
     }
 
+    goHome(): void {
+        this.routingService.goToLogin();
+    }
+
     isEmpty(fieldName: string): boolean {
         return this.createUserForm.get(fieldName).hasError('required') 
                 && (this.createUserForm.get(fieldName).touched || this.formSubmitted)
